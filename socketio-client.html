@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.socket.io/4.4.0/socket.io.min.js" integrity="sha384-1fOn6VtTq3PWwfsOrk45LnYcGosJwzMHv+Xh/Jx5303FVOXzEnw0EpLv30mtjmlj" crossorigin="anonymous"></script>
+    <script>
+        const onClick = () => {
+            const socket = io("http://localhost:5000");
+            socket.on("connect", (s) => {
+              console.log(socket.id);
+              console.log("connected.");
+              socket.emit("join",{"room":"BTC"})
+              console.log("Joined BTC room");
+                socket.on("feed", (message)=>{
+                    console.log("message received on BTC room:"+message);
+                });
+            });
+
+        }
+    </script>
+</head>
+<body>
+<button onclick="onClick()" >Run</button>
+</body>
+</html>
